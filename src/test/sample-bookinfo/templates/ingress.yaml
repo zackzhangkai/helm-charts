@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    {{ include "common.label" . | nindent 4 }}
+  name: bookinfo-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ .Values.productpage.name }}
+              servicePort: 9080
+      host: {{ .Values.ingress.host }}
